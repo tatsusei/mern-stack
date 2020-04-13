@@ -28,7 +28,7 @@ class IssueFilter extends React.Component {
 };
 
 function IssueTable(props){
-    const issueRows = this.props.issues.map(issue =>
+    const issueRows = props.issues.map(issue =>
         <IssueRow key={issue.id} issue={issue} />
     )
     return (
@@ -58,9 +58,9 @@ function IssueRow (props) {
             <td>{issue.id}</td>
             <td>{issue.status}</td>
             <td>{issue.owner}</td>
-            <td>{issue.created.toDateString()}</td>
+            <td>{issue.created}</td>
             <td>{issue.effort}</td>
-            <td>{issue.due ? issue.due.toDateString() : ''}</td>
+            <td>{issue.due}</td>
             <td>{issue.title}</td>
         </tr>
     );
@@ -121,10 +121,29 @@ class IssueList extends React.Component {
         this.loadData()
     }
 
-    loadData() {
-        setTimeout(() => {
-            this.setState({ issues: initialIssues })
-        }, 500)
+    async loadData() {
+        const query= `query {
+            issueList {
+                id
+                title
+                status
+                owner
+                created
+                effort
+                due
+            }
+        }`;
+
+        const response = await fetch('/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ query })
+        });
+        const result = await response.json();
+        this.setState({ issues: result.data.issueList })
+        // setTimeout(() => {
+        //     this.setState({ issues: initialIssues })
+        // }, 500)
     }
 
     render() {

@@ -1,4 +1,5 @@
 scalar GraphQLDate
+mutation setNewMessage($message: String!) { setAboutMessage(message: $message) }
 
 type Issue {
     id: Int!

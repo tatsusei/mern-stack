@@ -55,7 +55,6 @@ const resolvers = {
     GraphQLDate,
 };
 
-
 function setAboutMessage(_, { message }) { 
     return aboutMessage = message;
 }

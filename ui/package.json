@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "webpack --mode production",
     "watch": "webpack --watch",
+    "#start": "UI Server. HMR is enable in dev mode",
     "start": "nodemon -w uiserver.js -w .env uiserver.js"
   },
   "author": "",
@@ -29,6 +30,8 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
   }
 }

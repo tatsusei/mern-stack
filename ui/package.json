@@ -7,12 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel src --out-dir public",
     "watch": "babel src --out-dir public --watch --verbose",
-    "start": "nodemon -w uiserver.js uiserver.js"
+    "start": "nodemon -w uiserver.js -w .env uiserver.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^0.21.0",
     "nodemon": "^1.19.4"
   },
   "devDependencies": {

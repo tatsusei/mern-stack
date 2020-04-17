@@ -1,8 +1,9 @@
 import React from 'react';
-import IssueFilter from './IssueFilter.jsx'; 
-import IssueTable from './IssueTable.jsx'; 
+import IssueFilter from './IssueFilter.jsx';
+import IssueTable from './IssueTable.jsx';
 import IssueAdd from './IssueAdd.jsx';
 import graphQLFetch from './graphQLFetch.js';
+import URLSearchParams from 'url-search-params'
 
 export default class IssueList extends React.Component {
     constructor() {
@@ -12,7 +13,7 @@ export default class IssueList extends React.Component {
     }
 
     async createIssue(issue) {
-        const query= `mutation issueAdd($issue: IssueInputs!) {
+        const query = `mutation issueAdd($issue: IssueInputs!) {
             issueAdd(issue: $issue) {
                 id
             }
@@ -28,9 +29,23 @@ export default class IssueList extends React.Component {
         this.loadData()
     }
 
+    componentDidUpdate(prevProps) {
+        const { location: { search: prevSearch } } = prevProps;
+        const { location: { search } } = this.props;
+
+        if (prevSearch !== search) {
+            this.loadData()
+        }
+    }
+
     async loadData() {
-        const query= `query {
-            issueList {
+        const { location: { search } } = this.props;
+        const params = new URLSearchParams(search);
+        const vars = {};
+        if (params.get('status')) vars.status = params.get('status');
+
+        const query = `query issueList($status: StatusType){
+            issueList (status: $status){
                 id
                 title
                 status
@@ -40,11 +55,11 @@ export default class IssueList extends React.Component {
                 due
             }
         }`;
-        const data = await graphQLFetch(query);
+        const data = await graphQLFetch(query, vars);
         if (data) {
-           this.setState({ issues: data.issueList }) 
+            this.setState({ issues: data.issueList })
         }
-        
+
 
     }
 
@@ -54,9 +69,9 @@ export default class IssueList extends React.Component {
                 <h1>Issue Tracker</h1>
                 <IssueFilter />
                 <hr />
-                <IssueTable issues={this.state.issues}/>
+                <IssueTable issues={this.state.issues} />
                 <hr />
-                <IssueAdd createIssue={this.createIssue}/>
+                <IssueAdd createIssue={this.createIssue} />
             </React.Fragment>
         );
     }

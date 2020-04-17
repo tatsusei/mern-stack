@@ -2,6 +2,7 @@ import React from 'react';
 
 
 export default function IssueTable(props){
+   
     const issueRows = props.issues.map(issue =>
         <IssueRow key={issue.id} issue={issue} />
     )

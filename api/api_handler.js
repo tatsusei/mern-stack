@@ -10,7 +10,9 @@ const issue = require('./issue.js');
 const resolvers = { 
     Query: {
         about: about.getMessage,
-        issueList: issue.list, },
+        issueList: issue.list, 
+        issue: issue.get,
+    },
     Mutation: {
         setAboutMessage: about.setMessage,
         issueAdd: issue.add,

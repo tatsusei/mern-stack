@@ -25,8 +25,8 @@ const issuesDB = [
             + '\n1. Refresh the browser.'
             + '\n2. Select "New" in the filter'
             + '\n3. Refresh the browser again. Note the warning in the console:'
-            + '\n arning: Hash history cannot PUSH the same path; a new entry'
-            + '\n  W will not be added to the history stack'
+            + '\n   Warning: Hash history cannot PUSH the same path; a new entry'
+            + '\n   will not be added to the history stack'
             + '\n4. Click on Add.'
             + '\n5. There is an error in console, and add doesn\'t work.',
     },

@@ -60,8 +60,6 @@ export default class IssueList extends React.Component {
         if (data) {
             this.setState({ issues: data.issueList })
         }
-
-
     }
     
 

@@ -1,6 +1,7 @@
 import React from "react";
 import graphQLFetch from "./graphQLFetch.js";
 import { Link } from "react-router-dom";
+import NumInput from "./NumInput.jsx";
 export default class IssueEdit extends React.Component {
   constructor() {
     super();
@@ -16,19 +17,19 @@ export default class IssueEdit extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // const {
-    //   match: {
-    //     params: { id: prevId },
-    //   },
-    // } = prevProps;
-    // const {
-    //   match: {
-    //     params: { id },
-    //   },
-    // } = this.props;
-    // if (id !== prevId) {
-    //   this.loadData();
-    // }
+    const {
+      match: {
+        params: { id: prevId },
+      },
+    } = prevProps;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    if (id !== prevId) {
+      this.loadData();
+    }
   }
 
   handleSubmit(e) {
@@ -36,8 +37,9 @@ export default class IssueEdit extends React.Component {
     const { issue } = this.state;
     console.log(issue);
   }
-  onChange(e) {
-    const { name, value } = e.target;
+  onChange(e, naturalValue) {
+    const { name, value: textValue } = e.target;
+    const value = naturalValue === undefined ? textValue : naturalValue;
     this.setState((prevState) => ({
       issue: { ...prevState.issue, [name]: value },
     }));
@@ -129,7 +131,7 @@ export default class IssueEdit extends React.Component {
             <tr>
               <td>Effort:</td>
               <td>
-                <input name="effort" value={effort} onChange={this.onChange} />
+                <NumInput name="effort" value={effort} onChange={this.onChange} key={ id }/>
               </td>
             </tr>
             <tr>

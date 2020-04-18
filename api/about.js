@@ -1,11 +1,11 @@
-let aboutMessage = "Issue Tracker API v1.0"
+let aboutMessage = "Issue Tracker API v1.0";
 
 function setMessage(_, { message }) {
-    return aboutMessage = message;
+  return (aboutMessage = message);
 }
 
 function getMessage() {
-    return aboutMessage
+  return aboutMessage;
 }
 
-module.exports = { getMessage, setMessage }
+module.exports = { getMessage, setMessage };

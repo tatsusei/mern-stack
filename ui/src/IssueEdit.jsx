@@ -59,9 +59,9 @@ export default class IssueEdit extends React.Component {
     e.preventDefault();
     const { issue, invalidFields } = this.state;
     console.log(issue); // eslint-disable-line no-console
-    if(Object.keys(invalidFields).length !==0) return;
+    if (Object.keys(invalidFields).length !== 0) return;
 
-    const query =`mutation issueUpdate(
+    const query = `mutation issueUpdate(
       $id: Int!
       $changes: IssueUpdateInputs!
     ) {
@@ -75,13 +75,12 @@ export default class IssueEdit extends React.Component {
     }`;
 
     const { id, created, ...changes } = issue;
-    const data = await graphQLFetch(query, { changes, id })
+    const data = await graphQLFetch(query, { changes, id });
     if (data) {
-      this.setState({ issue: data.issueUpdate })
-      alert('Updated issue sucessfully ');
+      this.setState({ issue: data.issueUpdate });
+      alert("Updated issue sucessfully ");
     }
-
-  };
+  }
 
   async loadData() {
     const query = `query issue($id: Int!) {

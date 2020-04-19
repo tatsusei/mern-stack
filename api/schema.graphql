@@ -18,11 +18,22 @@ type Issue {
     due: GraphQLDate
     description: String
 }
-"Toned down Issue, used as inputs, without server generated values."
+"""Toned down Issue, used as inputs, without server generated values."""
 input IssueInputs {
     title: String!
-    "Optional, if not supplied, will be set to 'New'"
+    """Optional, if not supplied, will be set to 'New'"""
     status: StatusType = New
+    owner: String
+    effort: Int
+    due: GraphQLDate
+    description: String
+}
+
+"""Inputs for issueUpdate: all are optional. Whichever is specified will 
+be set to the given value, undefined fields will remain unmodified."""
+input IssueUpdateInputs {
+    title: String
+    status: StatusType
     owner: String
     effort: Int
     due: GraphQLDate
@@ -44,4 +55,5 @@ type Query {
 type Mutation {
     setAboutMessage(message: String!): String
     issueAdd(issue: IssueInputs!): Issue!
+    issueUpdate(id: Int!, changes: IssueUpdateInputs!): Issue!
 }

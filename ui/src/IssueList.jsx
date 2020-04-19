@@ -11,9 +11,32 @@ export default class IssueList extends React.Component {
     super();
     this.state = { issues: [] };
     this.createIssue = this.createIssue.bind(this);
-    this.closeIssue = this.closeIssue.bind(this)
+    this.closeIssue = this.closeIssue.bind(this);
+    this.deleteIssue = this.deleteIssue.bind(this);
   }
 
+  async deleteIssue(index) {
+    const query = `mutation issueDelete($id: Int!){
+      issueDelete(id: $id)
+    } `;
+    const { issues } = this.state;
+    const { location: {pathname, search }, history } = this.props;
+    const { id } = issues[index];
+    const data = await graphQLFetch(query, { id });
+    if (data && data.issueDelete) {
+      this.setState((prevState)=>{
+        const newList = [...prevState.issues];
+        if (pathname === `/issues/${id}`) {
+          history.push({ pathname: '/issues', search })
+        }
+        newList.splice(index, 1)
+        return { issues: newList}
+      });
+      
+    }else {
+      this.loadData()
+    }
+  }
   async createIssue(issue) {
     const query = `mutation issueAdd($issue: IssueInputs!) {
             issueAdd(issue: $issue) {
@@ -109,7 +132,7 @@ export default class IssueList extends React.Component {
         <h1>Issue Tracker</h1>
         <IssueFilter />
         <hr />
-        <IssueTable issues={issues} closeIssue={this.closeIssue} />
+        <IssueTable issues={issues} closeIssue={this.closeIssue} deleteIssue={this.deleteIssue}/>
         <hr />
         <IssueAdd createIssue={this.createIssue} />
         <hr />

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import graphQLFetch from "./graphQLFetch.js";
 import NumInput from "./NumInput.jsx";
 import DateInput from "./DateInput.jsx";
+import TextInput from "./TextInput.jsx";
 
 export default class IssueEdit extends React.Component {
   constructor() {
@@ -74,14 +75,7 @@ export default class IssueEdit extends React.Component {
       },
     } = this.props;
     const data = await graphQLFetch(query, { id });
-    if (data) {
-      const { issue } = data;
-      issue.owner = issue.owner != null ? issue.owner : "";
-      issue.description = issue.description != null ? issue.description : "";
-      this.setState({ issue, invalidFields: {} });
-    } else {
-      this.setState({ issue: {}, invalidFields: {} });
-    }
+    this.setState({ issue: data ? data.issue : {}, invalidFields: {} });
   }
 
   render() {
@@ -143,7 +137,12 @@ export default class IssueEdit extends React.Component {
             <tr>
               <td>Owner:</td>
               <td>
-                <input name="owner" value={owner} onChange={this.onChange} />
+                <TextInput
+                  name="owner"
+                  value={owner}
+                  onChange={this.onChange}
+                  key={id}
+                />
               </td>
             </tr>
             <tr>
@@ -172,7 +171,8 @@ export default class IssueEdit extends React.Component {
             <tr>
               <td>Title:</td>
               <td>
-                <input
+                <TextInput
+                  key={id}
                   size={50}
                   name="title"
                   value={title}
@@ -183,7 +183,9 @@ export default class IssueEdit extends React.Component {
             <tr>
               <td>Description:</td>
               <td>
-                <textarea
+                <TextInput
+                  tag="textarea"
+                  key={id}
                   rows={8}
                   cols={50}
                   name="description"

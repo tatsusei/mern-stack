@@ -8,7 +8,7 @@
     "compile": "webpack --mode production",
     "watch": "webpack --watch",
     "#start": "UI Server. HMR is enable in dev mode",
-    "start": "nodemon -w uiserver.js -w .env uiserver.js"
+    "start": "nodemon -w uiserver.js -w .env server/uiserver.js"
   },
   "author": "",
   "license": "ISC",

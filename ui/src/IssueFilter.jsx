@@ -128,7 +128,6 @@ class IssueFilter extends React.Component {
               </Button>
           </ButtonToolbar> 
           </FormGroup>
-     
         </Col>
        </Row>
 

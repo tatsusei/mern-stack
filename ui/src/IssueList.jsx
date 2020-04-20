@@ -1,7 +1,7 @@
 import React from "react";
 import IssueFilter from "./IssueFilter.jsx";
 import IssueTable from "./IssueTable.jsx";
-import IssueAdd from "./IssueAdd.jsx";
+// import IssueAdd from "./IssueAdd.jsx";
 import graphQLFetch from "./graphQLFetch.js";
 import URLSearchParams from "url-search-params";
 import { Route } from "react-router-dom";
@@ -64,18 +64,18 @@ export default class IssueList extends React.Component {
       this.loadData()
     }
   }
-  async createIssue(issue) {
-    const query = `mutation issueAdd($issue: IssueInputs!) {
-            issueAdd(issue: $issue) {
-                id
-            }
-        }`;
+  // async createIssue(issue) {
+  //   const query = `mutation issueAdd($issue: IssueInputs!) {
+  //           issueAdd(issue: $issue) {
+  //               id
+  //           }
+  //       }`;
 
-    const data = await graphQLFetch(query, { issue }, this.showError);
-    if (data) {
-      this.loadData();
-    }
-  }
+  //   const data = await graphQLFetch(query, { issue }, this.showError);
+  //   if (data) {
+  //     this.loadData();
+  //   }
+  // }
 
   async closeIssue(index) {
     const query =`mutation issueClose($id:Int!){
@@ -162,7 +162,7 @@ export default class IssueList extends React.Component {
         <hr />
         <IssueTable issues={issues} closeIssue={this.closeIssue} deleteIssue={this.deleteIssue}/>
     
-        <IssueAdd createIssue={this.createIssue} />
+        {/* <IssueAdd createIssue={this.createIssue} /> */}
         
         <Route path={`${match.path}/:id`} component={IssueDetail} />
 

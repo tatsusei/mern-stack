@@ -13,6 +13,7 @@ import {
 import Contents from "./Contents.jsx";
 import { NavLink } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import IssueAddNavItem from './IssueAddNavItem.jsx'
 
 function NavBar() {
   return (
@@ -33,7 +34,7 @@ function NavBar() {
         </LinkContainer>
       </Nav>
       <Nav pullRight>
-        <NavItem>
+        {/* <NavItem>
           <OverlayTrigger
             placement="left"
             delayShow={1000}
@@ -41,7 +42,8 @@ function NavBar() {
           >
             <Glyphicon glyph="plus" />
           </OverlayTrigger>
-        </NavItem>
+        </NavItem> */}
+        <IssueAddNavItem />
         <NavDropdown
           id="user-dropdown"
           title={<Glyphicon glyph="option-vertical"></Glyphicon>}

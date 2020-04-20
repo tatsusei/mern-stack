@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 function displayFormat(date) {
-  return date != null ? date.toDateString() : "";
+  return (date != null) ? date.toDateString() : '';
 }
 
 function editFormat(date) {
-  return date != null ? date.toISOString().substr(0, 10) : "";
+  return (date != null) ? date.toISOString().substr(0, 10) : '';
 }
 
 function unformat(str) {
@@ -31,12 +31,10 @@ export default class DateInput extends React.Component {
   }
 
   onBlur(e) {
-    
     const { value, valid: oldValid } = this.state;
-    console.log(oldValid)
     const { onValidityChange, onChange } = this.props;
     const dateValue = unformat(value);
-    const valid = value === "" || dateValue != null;
+    const valid = value === '' || dateValue != null;
     if (valid !== oldValid && onValidityChange) {
       onValidityChange(e, valid);
     }
@@ -52,17 +50,14 @@ export default class DateInput extends React.Component {
 
   render() {
     const { valid, focused, value } = this.state;
-    const { value: origValue, name } = this.props;
-    const className = !valid && !focused ? "invalid" : null;
-    const displayValue = focused || !valid ? value : displayFormat(origValue);
+    const { value: origValue, onValidityChange, ...props } = this.props;
+    const displayValue = (focused || !valid) ? value
+      : displayFormat(origValue);
     return (
       <input
-        type="text"
-        size={20}
-        name={name}
-        className={className}
+        {...props}
         value={displayValue}
-        placeholder={focused ? "yyyy-mm-dd" : null}
+        placeholder={focused ? 'yyyy-mm-dd' : null}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onChange={this.onChange}

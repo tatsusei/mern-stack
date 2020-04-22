@@ -19,7 +19,7 @@ export default class IssueList extends React.Component {
       toastMessage: "",
       toastType: "info"
     };
-    this.createIssue = this.createIssue.bind(this);
+  //  this.createIssue = this.createIssue.bind(this);
     this.closeIssue = this.closeIssue.bind(this);
     this.deleteIssue = this.deleteIssue.bind(this);
 

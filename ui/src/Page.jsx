@@ -49,7 +49,10 @@ function NavBar() {
           title={<Glyphicon glyph="option-vertical"></Glyphicon>}
           noCaret
         >
-          <MenuItem>About</MenuItem>
+          <LinkContainer to="/about">
+            <MenuItem>About</MenuItem>
+          </LinkContainer>
+          
         </NavDropdown>
       </Nav>
     </Navbar>

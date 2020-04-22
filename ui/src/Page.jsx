@@ -1,27 +1,20 @@
-import React from "react";
+import React from 'react';
 import {
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem,
-  Glyphicon,
-  Tooltip,
-  OverlayTrigger,
+  Navbar, Nav, NavItem, NavDropdown,
+  MenuItem, Glyphicon,
   Grid,
-} from "react-bootstrap";
-import Contents from "./Contents.jsx";
-import { NavLink } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import IssueAddNavItem from './IssueAddNavItem.jsx'
+} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+
+import Contents from './Contents.jsx';
+import IssueAddNavItem from './IssueAddNavItem.jsx';
 
 function NavBar() {
   return (
-    <Navbar>
+    <Navbar fluid>
       <Navbar.Header>
         <Navbar.Brand>Issue Tracker</Navbar.Brand>
       </Navbar.Header>
-
       <Nav>
         <LinkContainer exact to="/">
           <NavItem>Home</NavItem>
@@ -34,25 +27,15 @@ function NavBar() {
         </LinkContainer>
       </Nav>
       <Nav pullRight>
-        {/* <NavItem>
-          <OverlayTrigger
-            placement="left"
-            delayShow={1000}
-            overlay={<Tooltip id="create-issue">Create Issue</Tooltip>}
-          >
-            <Glyphicon glyph="plus" />
-          </OverlayTrigger>
-        </NavItem> */}
         <IssueAddNavItem />
         <NavDropdown
           id="user-dropdown"
-          title={<Glyphicon glyph="option-vertical"></Glyphicon>}
+          title={<Glyphicon glyph="option-vertical" />}
           noCaret
         >
           <LinkContainer to="/about">
             <MenuItem>About</MenuItem>
           </LinkContainer>
-          
         </NavDropdown>
       </Nav>
     </Navbar>
@@ -62,14 +45,16 @@ function NavBar() {
 function Footer() {
   return (
     <small>
+      <hr />
       <p className="text-center">
-        Full source code avaliabe at this {" "} 
+        Full source code available at this
+        {' '}
         <a href="https://github.com/vasansr/pro-mern-stack-2">
-          GitHub Repository
+          GitHub repository
         </a>
       </p>
     </small>
-  )
+  );
 }
 
 export default function Page() {
@@ -77,9 +62,8 @@ export default function Page() {
     <div>
       <NavBar />
       <Grid fluid>
-         <Contents />
+        <Contents />
       </Grid>
-     <hr />
       <Footer />
     </div>
   );

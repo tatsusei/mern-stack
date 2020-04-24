@@ -40,6 +40,7 @@ export default function withToast(OriginalComponent) {
             showError={this.showError}
             showSuccess={this.showSuccess}
             dismissToast={this.dismissToast}
+            {...this.props}
           />
           <Toast
             bsStyle={toastType}

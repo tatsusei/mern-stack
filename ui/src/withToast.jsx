@@ -2,7 +2,7 @@ import React from "react";
 import Toast from "./Toast.jsx";
 
 export default function withToast(OriginalComponent) {
-  return class ToastWrapper extends React.Component{
+  return class ToastWrapper extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -10,6 +10,8 @@ export default function withToast(OriginalComponent) {
         toastMessage: "",
         toastType: "success",
       };
+      this.showSuccess = this.showSuccess.bind(this);
+      this.showError = this.showError.bind(this);
       this.dismissToast = this.dismissToast.bind(this);
     }
 
@@ -20,6 +22,7 @@ export default function withToast(OriginalComponent) {
         toastType: "success",
       });
     }
+
     showError(message) {
       this.setState({
         toastVisible: true,
@@ -52,5 +55,5 @@ export default function withToast(OriginalComponent) {
         </React.Fragment>
       );
     }
-  }
+  };
 }
